@@ -39,3 +39,18 @@ impl Display for MessageTypes {
         }
     }
 }
+
+#[cfg(test)]
+mod tests {
+
+    use super::*;
+
+    #[test]
+    fn test_from_bytes() {
+        let pet_bytes = vec![1_u8,76,1,4];
+
+        let message_enum = MessageTypes::from_bytes(pet_bytes);
+
+        println!("{}", message_enum);
+    }
+}

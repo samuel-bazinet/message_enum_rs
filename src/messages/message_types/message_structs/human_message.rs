@@ -42,6 +42,6 @@ impl Serializable for HumanMessage {
 
 impl Display for HumanMessage {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(f, "{}. {}. is {} years old and earns {} per year", self.first_name_initial, self.last_name_initial, self.age, self.income)
+        write!(f, "{}. {}. is {} years old and earns {} per year", self.first_name_initial as char, self.last_name_initial as char, self.age, self.income)
     }
 }

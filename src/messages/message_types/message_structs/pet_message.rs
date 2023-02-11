@@ -39,6 +39,6 @@ impl Serializable for PetMessage {
 
 impl Display for PetMessage {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(f, "The pet {} is a {} and is {} years old", self.initial, self.class, self.age)
+        write!(f, "The pet {} is a {} and is {} years old", self.initial as char, self.class, self.age)
     }
 }
