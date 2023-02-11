@@ -1,0 +1,24 @@
+[package]
+name = "message_enum"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[[bin]]
+name = "server"
+path = "src/server.rs"
+
+[[bin]]
+name = "human_client"
+path = "src/human_client.rs"
+
+[[bin]]
+name = "pet_client"
+path = "src/pet_client.rs"
+
+[[bin]]
+name = "game_client"
+path = "src/game_client.rs"
+
+[dependencies]
