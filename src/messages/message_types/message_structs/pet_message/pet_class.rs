@@ -4,7 +4,7 @@ use std::fmt::Display;
 #[repr(u8)]
 pub enum PetClass {
     PureBreed,
-    Mutt
+    Mutt,
 }
 
 impl TryFrom<u8> for PetClass {
@@ -14,7 +14,7 @@ impl TryFrom<u8> for PetClass {
         match value {
             0 => Ok(PetClass::PureBreed),
             1 => Ok(PetClass::Mutt),
-            _ => Err("Invalid value")
+            _ => Err("Invalid value"),
         }
     }
 }
@@ -23,7 +23,7 @@ impl Display for PetClass {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::PureBreed => write!(f, "pure breed"),
-            Self::Mutt => write!(f, "mutt")
+            Self::Mutt => write!(f, "mutt"),
         }
     }
 }

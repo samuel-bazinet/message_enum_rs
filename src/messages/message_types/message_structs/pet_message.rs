@@ -1,6 +1,8 @@
 pub mod pet_class;
 
+use crate::messages::message_types::message_constants::MessageId;
 use pet_class::PetClass;
+
 use super::message_traits::serializable::Serializable;
 
 use std::fmt::Display;
@@ -8,12 +10,12 @@ use std::fmt::Display;
 pub struct PetMessage {
     initial: u8,
     class: PetClass,
-    age: u8
+    age: u8,
 }
 
 impl Serializable for PetMessage {
     fn serialize(&self) -> Vec<u8> {
-        let mut return_bytes = Vec::new();
+        let mut return_bytes = vec![MessageId::Pet.to_u8()];
         let initial_bytes = self.initial.to_ne_bytes();
         for i in initial_bytes.iter() {
             return_bytes.push(*i);
@@ -33,12 +35,20 @@ impl Serializable for PetMessage {
         let initial = bytes[0];
         let class = PetClass::try_from(bytes[1]).unwrap();
         let age = bytes[2];
-        PetMessage { initial, class, age }
+        PetMessage {
+            initial,
+            class,
+            age,
+        }
     }
 }
 
 impl Display for PetMessage {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(f, "The pet {} is a {} and is {} years old", self.initial as char, self.class, self.age)
+        write!(
+            f,
+            "The pet {} is a {} and is {} years old",
+            self.initial as char, self.class, self.age
+        )
     }
 }

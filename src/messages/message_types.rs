@@ -1,13 +1,11 @@
-mod message_structs;
-mod message_constants;
+pub mod message_constants;
+pub mod message_structs;
 
 use std::fmt::Display;
 
 use message_structs::{
-    human_message::HumanMessage,
-    pet_message::PetMessage,
-    game_message::GameMessage,
-    message_traits::serializable::Serializable
+    game_message::GameMessage, human_message::HumanMessage,
+    message_traits::serializable::Serializable, pet_message::PetMessage,
 };
 
 use message_constants::MessageId;
@@ -15,7 +13,7 @@ use message_constants::MessageId;
 pub enum MessageTypes {
     HumanMessageType(HumanMessage),
     PetMessageType(PetMessage),
-    GameMessageType(GameMessage)
+    GameMessageType(GameMessage),
 }
 
 impl MessageTypes {
@@ -25,7 +23,7 @@ impl MessageTypes {
         match id {
             MessageId::Human => Self::HumanMessageType(HumanMessage::deserialize(bytes)),
             MessageId::Pet => Self::PetMessageType(PetMessage::deserialize(bytes)),
-            MessageId::Game => Self::GameMessageType(GameMessage::deserialize(bytes))
+            MessageId::Game => Self::GameMessageType(GameMessage::deserialize(bytes)),
         }
     }
 }
@@ -35,7 +33,7 @@ impl Display for MessageTypes {
         match self {
             Self::GameMessageType(a) => write!(f, "{a}"),
             Self::HumanMessageType(a) => write!(f, "{a}"),
-            Self::PetMessageType(a) => write!(f, "{a}")
+            Self::PetMessageType(a) => write!(f, "{a}"),
         }
     }
 }
@@ -47,7 +45,7 @@ mod tests {
 
     #[test]
     fn test_from_bytes() {
-        let pet_bytes = vec![1_u8,76,1,4];
+        let pet_bytes = vec![1_u8, 76, 1, 4];
 
         let message_enum = MessageTypes::from_bytes(pet_bytes);
 
