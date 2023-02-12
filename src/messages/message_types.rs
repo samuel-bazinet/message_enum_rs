@@ -19,8 +19,7 @@ pub enum MessageTypes {
 impl MessageTypes {
     fn from_bytes(mut bytes: Vec<u8>) -> Self {
         let id_byte = bytes.remove(0);
-        let id = MessageId::from_u8(id_byte);
-        match id {
+        match MessageId::from_u8(id_byte) {
             MessageId::Human => Self::HumanMessageType(HumanMessage::deserialize(bytes)),
             MessageId::Pet => Self::PetMessageType(PetMessage::deserialize(bytes)),
             MessageId::Game => Self::GameMessageType(GameMessage::deserialize(bytes)),
