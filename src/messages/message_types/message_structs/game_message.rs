@@ -1,6 +1,6 @@
 use std::fmt::Display;
 
-use super::message_traits::serializable::Serializable;
+use crate::message_traits::serializable::Serializable;
 
 use super::super::message_constants::MessageId;
 

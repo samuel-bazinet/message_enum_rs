@@ -1,4 +1,4 @@
-use super::super::message_types::message_structs::message_traits::serializable::Serializable;
+use crate::message_traits::serializable::Serializable;
 use crate::constants;
 
 use std::net::{SocketAddr, UdpSocket};

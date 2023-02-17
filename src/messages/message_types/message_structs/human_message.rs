@@ -2,7 +2,7 @@ use std::fmt::Display;
 
 use crate::messages::message_types::message_constants::MessageId;
 
-use super::message_traits::serializable::Serializable;
+use crate::message_traits::serializable::Serializable;
 
 pub struct HumanMessage {
     first_name_initial: u8,

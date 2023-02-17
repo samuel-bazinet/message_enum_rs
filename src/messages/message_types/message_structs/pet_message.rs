@@ -3,7 +3,7 @@ pub mod pet_class;
 use crate::messages::message_types::message_constants::MessageId;
 use pet_class::PetClass;
 
-use super::message_traits::serializable::Serializable;
+use crate::message_traits::serializable::Serializable;
 
 use std::fmt::Display;
 

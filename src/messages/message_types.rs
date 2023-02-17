@@ -1,12 +1,14 @@
-pub mod message_constants;
+mod message_constants;
 pub mod message_structs;
 
 use std::fmt::Display;
 
 use message_structs::{
     game_message::GameMessage, human_message::HumanMessage,
-    message_traits::serializable::Serializable, pet_message::PetMessage,
+    pet_message::PetMessage,
 };
+use crate::message_traits::serializable::Serializable;
+
 
 use message_constants::MessageId;
 
