@@ -22,3 +22,5 @@ name = "game_client"
 path = "src/game_client.rs"
 
 [dependencies]
+
+rand = "0.8"

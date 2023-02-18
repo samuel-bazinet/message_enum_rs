@@ -1,5 +1,5 @@
-cargo build
-./target/debug/server
-./target/debug/human_client
-./target/debug/pet_client
-./target/debug/game_client
+cargo build --release
+./target/release/server
+./target/release/human_client
+./target/release/pet_client
+./target/release/game_client

@@ -4,6 +4,7 @@ use crate::messages::message_types::message_constants::MessageId;
 
 use crate::message_traits::serializable::Serializable;
 
+/// A message representing a human that can be serialized
 #[derive(Clone)]
 pub struct HumanMessage {
     first_name_initial: u8,
@@ -12,7 +13,20 @@ pub struct HumanMessage {
     income: i64,
 }
 
+impl HumanMessage {
+    /// Create a new HumanMessage from the fields
+    pub fn from(first_name_initial: u8, last_name_initial: u8, age: u8, income: i64) -> Self {
+        HumanMessage {
+            first_name_initial,
+            last_name_initial,
+            age,
+            income,
+        }
+    }
+}
+
 impl Serializable for HumanMessage {
+    /// Serialize the message
     fn serialize(&self) -> Vec<u8> {
         let mut return_bytes = vec![MessageId::Human.to_u8()];
         let first_name_initial_byte = self.first_name_initial.to_ne_bytes();
@@ -34,6 +48,7 @@ impl Serializable for HumanMessage {
         return_bytes
     }
 
+    /// Deserialize the message
     fn deserialize(bytes: Vec<u8>) -> Self {
         let first_name_initial = bytes[0];
         let last_name_initial = bytes[1];
