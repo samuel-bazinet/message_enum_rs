@@ -7,19 +7,19 @@ edition = "2021"
 
 [[bin]]
 name = "server"
-path = "src/server.rs"
+path = "src/executables/server.rs"
 
 [[bin]]
 name = "human_client"
-path = "src/human_client.rs"
+path = "src/executables/clients/human_client.rs"
 
 [[bin]]
 name = "pet_client"
-path = "src/pet_client.rs"
+path = "src/executables/clients/pet_client.rs"
 
 [[bin]]
 name = "game_client"
-path = "src/game_client.rs"
+path = "src/executables/clients/game_client.rs"
 
 [dependencies]
 
