@@ -3,15 +3,14 @@ pub mod message_structs;
 
 use std::fmt::Display;
 
-use message_structs::{
-    game_message::GameMessage, human_message::HumanMessage,
-    pet_message::PetMessage,
-};
 use crate::message_traits::serializable::Serializable;
-
+use message_structs::{
+    game_message::GameMessage, human_message::HumanMessage, pet_message::PetMessage,
+};
 
 use message_constants::MessageId;
 
+#[derive(Clone)]
 pub enum MessageTypes {
     HumanMessageType(HumanMessage),
     PetMessageType(PetMessage),
@@ -19,7 +18,7 @@ pub enum MessageTypes {
 }
 
 impl MessageTypes {
-    fn from_bytes(mut bytes: Vec<u8>) -> Self {
+    pub fn from_bytes(mut bytes: Vec<u8>) -> Self {
         let id_byte = bytes.remove(0);
         match MessageId::from_u8(id_byte) {
             MessageId::Human => Self::HumanMessageType(HumanMessage::deserialize(bytes)),

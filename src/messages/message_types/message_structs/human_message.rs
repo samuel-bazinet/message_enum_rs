@@ -4,6 +4,7 @@ use crate::messages::message_types::message_constants::MessageId;
 
 use crate::message_traits::serializable::Serializable;
 
+#[derive(Clone)]
 pub struct HumanMessage {
     first_name_initial: u8,
     last_name_initial: u8,

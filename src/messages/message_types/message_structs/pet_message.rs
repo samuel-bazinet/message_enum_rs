@@ -7,6 +7,7 @@ use crate::message_traits::serializable::Serializable;
 
 use std::fmt::Display;
 
+#[derive(Clone)]
 pub struct PetMessage {
     initial: u8,
     class: PetClass,

@@ -1,5 +1,5 @@
-use crate::message_traits::serializable::Serializable;
 use crate::constants;
+use crate::message_traits::serializable::Serializable;
 
 use std::net::{SocketAddr, UdpSocket};
 
@@ -24,7 +24,7 @@ impl SendingClient {
 
         let sent_size = client_socket
             .send_to(
-                message_bytes.as_slice().try_into().unwrap(),
+                message_bytes.as_slice(),
                 SocketAddr::from((constants::LOCAL_HOST, constants::SERVER_PORT)),
             )
             .unwrap();

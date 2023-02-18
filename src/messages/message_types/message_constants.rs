@@ -1,3 +1,4 @@
+#[derive(Clone)]
 #[repr(u8)]
 pub enum MessageId {
     Human = 0,
@@ -15,7 +16,7 @@ impl MessageId {
         }
     }
 
-    pub fn to_u8(self) -> u8 {
-        self as u8
+    pub fn to_u8(&self) -> u8 {
+        self.clone() as u8
     }
 }
