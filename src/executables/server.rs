@@ -3,7 +3,7 @@ use message_enum::{constants, messages, thread_pool::ThreadPool};
 use std::{
     net::{SocketAddr, UdpSocket},
     sync::{Arc, Mutex},
-    vec::Vec,
+    vec::Vec, process::abort,
 };
 fn main() {
     println!("Starting server");
@@ -12,7 +12,17 @@ fn main() {
         constants::LOCAL_HOST,
         constants::SERVER_PORT,
     )))
-    .unwrap();
+    .unwrap();  
+
+    let storage_accessor = message_storage.clone();
+
+    _ = ctrlc::set_handler(move || {
+        println!("Terminating server, printing stored messages");
+        for i in storage_accessor.lock().unwrap().iter() {
+            println!("{i}");
+        }
+        abort();
+    });
 
     let pool = ThreadPool::new(3);
 
