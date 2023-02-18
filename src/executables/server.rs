@@ -43,6 +43,6 @@ fn handle_message(
 ) {
     let message_bytes = Vec::from_iter(buffer);
     let message = messages::message_types::MessageTypes::from_bytes(message_bytes);
-    println!("Receive message with content: {message}");
+    println!("Message has content: {message}");
     message_storage.lock().unwrap().push(message);
 }
