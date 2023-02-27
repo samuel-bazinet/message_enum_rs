@@ -10,11 +10,7 @@ fn main() {
     println!("Starting pet client");
     let mut rng = rand::thread_rng();
     loop {
-        let message = PetMessage::from(
-            rng.gen_range(65..91),
-            rng.gen_range(0..2),
-            rng.gen(),
-        );
+        let message = PetMessage::from(rng.gen_range(65..91), rng.gen_range(0..2), rng.gen());
         let client = SendingClient::from(constants::LOCAL_HOST, constants::HUMAN_PORT);
         println!("Sending {message} to server");
         client.send_message_server(message);

@@ -18,12 +18,15 @@ pub struct PetMessage {
 impl PetMessage {
     /// Generate a pet message by proving the fields
     pub fn from(initial: u8, class: u8, age: u8) -> Self {
-        PetMessage { initial, class: PetClass::try_from(class).unwrap(), age }
+        PetMessage {
+            initial,
+            class: PetClass::try_from(class).unwrap(),
+            age,
+        }
     }
 }
 
 impl Serializable for PetMessage {
-
     /// Serialize the message
     fn serialize(&self) -> Vec<u8> {
         let mut return_bytes = vec![MessageId::Pet.to_u8()];

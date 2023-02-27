@@ -2,8 +2,9 @@ use message_enum::{constants, messages, thread_pool::ThreadPool};
 
 use std::{
     net::{SocketAddr, UdpSocket},
+    process::abort,
     sync::{Arc, Mutex},
-    vec::Vec, process::abort,
+    vec::Vec,
 };
 fn main() {
     println!("Starting server");
@@ -12,7 +13,7 @@ fn main() {
         constants::LOCAL_HOST,
         constants::SERVER_PORT,
     )))
-    .unwrap();  
+    .unwrap();
 
     let storage_accessor = message_storage.clone();
 

@@ -15,12 +15,16 @@ pub struct GameMessage {
 impl GameMessage {
     /// Generate a message from the fields
     pub fn from(rating: f32, price: f32, active_players: u64) -> Self {
-        GameMessage { rating, price, active_players }
+        GameMessage {
+            rating,
+            price,
+            active_players,
+        }
     }
 }
 
 impl Serializable for GameMessage {
-    /// Serialize the message 
+    /// Serialize the message
     fn serialize(&self) -> Vec<u8> {
         let mut return_bytes = vec![MessageId::Game.to_u8()];
         let rating_bytes = self.rating.to_ne_bytes();
