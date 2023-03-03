@@ -11,7 +11,7 @@ fn main() {
     let mut rng = rand::thread_rng();
     loop {
         let message = GameMessage::from(rng.gen(), rng.gen(), rng.gen());
-        let client = SendingClient::from(constants::LOCAL_HOST, constants::HUMAN_PORT);
+        let client = SendingClient::from(constants::LOCAL_HOST, constants::GAME_PORT);
         println!("Sending {message} to server");
         client.send_message_server(message);
         let sleep_time = time::Duration::from_secs(3);
