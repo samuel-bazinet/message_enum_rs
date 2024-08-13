@@ -1,6 +1,6 @@
 use std::fmt::Display;
 
-use crate::messages::message_types::message_constants::MessageId;
+use crate::messages::message_types::message_id::MessageId;
 
 use crate::message_traits::serializable::Serializable;
 
@@ -15,7 +15,7 @@ pub struct HumanMessage {
 
 impl HumanMessage {
     /// Create a new HumanMessage from the fields
-    pub fn from(first_name_initial: u8, last_name_initial: u8, age: u8, income: i64) -> Self {
+    pub fn new(first_name_initial: u8, last_name_initial: u8, age: u8, income: i64) -> Self {
         HumanMessage {
             first_name_initial,
             last_name_initial,
@@ -28,7 +28,7 @@ impl HumanMessage {
 impl Serializable for HumanMessage {
     /// Serialize the message
     fn serialize(&self) -> Vec<u8> {
-        let mut return_bytes = vec![MessageId::Human.to_u8()];
+        let mut return_bytes = vec![MessageId::Human.into()];
         let first_name_initial_byte = self.first_name_initial.to_ne_bytes();
         for i in first_name_initial_byte.iter() {
             return_bytes.push(*i);

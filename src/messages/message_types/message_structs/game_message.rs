@@ -2,7 +2,7 @@ use std::fmt::Display;
 
 use crate::message_traits::serializable::Serializable;
 
-use super::super::message_constants::MessageId;
+use super::super::message_id::MessageId;
 
 /// Message representing a game that can be serialized
 #[derive(Clone)]
@@ -14,7 +14,7 @@ pub struct GameMessage {
 
 impl GameMessage {
     /// Generate a message from the fields
-    pub fn from(rating: f32, price: f32, active_players: u64) -> Self {
+    pub fn new(rating: f32, price: f32, active_players: u64) -> Self {
         GameMessage {
             rating,
             price,
@@ -26,7 +26,7 @@ impl GameMessage {
 impl Serializable for GameMessage {
     /// Serialize the message
     fn serialize(&self) -> Vec<u8> {
-        let mut return_bytes = vec![MessageId::Game.to_u8()];
+        let mut return_bytes = vec![MessageId::Game.into()];
         let rating_bytes = self.rating.to_ne_bytes();
         for i in rating_bytes.iter() {
             return_bytes.push(*i);

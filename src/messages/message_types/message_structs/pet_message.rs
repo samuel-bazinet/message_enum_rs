@@ -1,6 +1,6 @@
 pub mod pet_class;
 
-use crate::messages::message_types::message_constants::MessageId;
+use crate::messages::message_types::message_id::MessageId;
 use pet_class::PetClass;
 
 use crate::message_traits::serializable::Serializable;
@@ -17,7 +17,7 @@ pub struct PetMessage {
 
 impl PetMessage {
     /// Generate a pet message by proving the fields
-    pub fn from(initial: u8, class: u8, age: u8) -> Self {
+    pub fn new(initial: u8, class: u8, age: u8) -> Self {
         PetMessage {
             initial,
             class: PetClass::try_from(class).unwrap(),
@@ -29,7 +29,7 @@ impl PetMessage {
 impl Serializable for PetMessage {
     /// Serialize the message
     fn serialize(&self) -> Vec<u8> {
-        let mut return_bytes = vec![MessageId::Pet.to_u8()];
+        let mut return_bytes = vec![MessageId::Pet.into()];
         let initial_bytes = self.initial.to_ne_bytes();
         for i in initial_bytes.iter() {
             return_bytes.push(*i);

@@ -6,8 +6,8 @@ pub enum MessageId {
     Game,
 }
 
-impl MessageId {
-    pub fn from_u8(value: u8) -> Self {
+impl From<u8> for MessageId {
+    fn from(value: u8) -> Self {
         match value {
             0 => Self::Human,
             1 => Self::Pet,
@@ -15,8 +15,10 @@ impl MessageId {
             _ => panic!("Invalid ID provided"),
         }
     }
+}
 
-    pub fn to_u8(&self) -> u8 {
-        self.clone() as u8
+impl From<MessageId> for u8 {
+    fn from(value: MessageId) -> Self {
+        value as u8
     }
 }

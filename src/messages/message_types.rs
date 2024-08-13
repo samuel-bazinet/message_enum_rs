@@ -1,4 +1,4 @@
-mod message_constants;
+mod message_id;
 pub mod message_structs;
 
 use std::fmt::Display;
@@ -8,22 +8,22 @@ use message_structs::{
     game_message::GameMessage, human_message::HumanMessage, pet_message::PetMessage,
 };
 
-use message_constants::MessageId;
+use message_id::MessageId;
 
 #[derive(Clone)]
 pub enum MessageTypes {
-    HumanMessageType(HumanMessage),
     PetMessageType(PetMessage),
+    HumanMessageType(HumanMessage),
     GameMessageType(GameMessage),
 }
 
-impl MessageTypes {
-    pub fn from_bytes(mut bytes: Vec<u8>) -> Self {
-        let id_byte = bytes.remove(0);
-        match MessageId::from_u8(id_byte) {
-            MessageId::Human => Self::HumanMessageType(HumanMessage::deserialize(bytes)),
-            MessageId::Pet => Self::PetMessageType(PetMessage::deserialize(bytes)),
-            MessageId::Game => Self::GameMessageType(GameMessage::deserialize(bytes)),
+impl From<Vec<u8>> for MessageTypes {
+    fn from(mut value: Vec<u8>) -> Self {
+        let id_byte = value.remove(0);
+        match id_byte.into() {
+            MessageId::Human => Self::HumanMessageType(HumanMessage::deserialize(value)),
+            MessageId::Pet => Self::PetMessageType(PetMessage::deserialize(value)),
+            MessageId::Game => Self::GameMessageType(GameMessage::deserialize(value)),
         }
     }
 }
@@ -47,7 +47,7 @@ mod tests {
     fn test_from_bytes() {
         let pet_bytes = vec![1_u8, 76, 1, 4];
 
-        let message_enum = MessageTypes::from_bytes(pet_bytes);
+        let message_enum = MessageTypes::from(pet_bytes);
 
         println!("{}", message_enum);
     }

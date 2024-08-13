@@ -10,7 +10,7 @@ fn main() {
     println!("Starting human client");
     let mut rng = rand::thread_rng();
     loop {
-        let message = HumanMessage::from(
+        let message = HumanMessage::new(
             rng.gen_range(65..91),
             rng.gen_range(65..91),
             rng.gen(),

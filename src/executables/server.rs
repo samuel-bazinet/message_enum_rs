@@ -17,13 +17,14 @@ fn main() {
 
     let storage_accessor = message_storage.clone();
 
-    _ = ctrlc::set_handler(move || {
+    ctrlc::set_handler(move || {
         println!("Terminating server, printing stored messages");
         for i in storage_accessor.lock().unwrap().iter() {
             println!("{i}");
         }
         abort();
-    });
+    })
+    .expect("Error setting the server's ctrlc behaviour.");
 
     let pool = ThreadPool::new(3);
 
@@ -43,7 +44,7 @@ fn handle_message(
     message_storage: Arc<Mutex<Vec<messages::message_types::MessageTypes>>>,
 ) {
     let message_bytes = Vec::from_iter(buffer);
-    let message = messages::message_types::MessageTypes::from_bytes(message_bytes);
+    let message = message_bytes.into();
     println!("Message has content: {message}");
     message_storage.lock().unwrap().push(message);
 }
